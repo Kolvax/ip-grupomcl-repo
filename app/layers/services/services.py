@@ -6,11 +6,12 @@ from django.contrib.auth import get_user
 
 def getAllImages(input=None):
     # obtiene un listado de datos "crudos" desde la API, usando a transport.py.
-    json_collection = []
-
+    
+    json_collection = Transport_getAllImages(input)
     # recorre cada dato crudo de la colección anterior, lo convierte en una Card y lo agrega a images.
-    images = []
-
+    images = [fromRequestIntoCard(obj) for obj in json_collection]
+    
+    print("[Services]: Lista de imagenes transformadas:", images)
     return images
 
 # añadir favoritos (usado desde el template 'home.html')
